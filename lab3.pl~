@@ -1,0 +1,9 @@
+list1([1, 2, 3]).
+list2([3]).
+list3([4, 5, list1]).
+list4([1, 2, 3]).
+
+mycompare([], []).
+mycompare([H1/T1], [H2/T2]) :- H1 == H2, mycompare(T1, T2).
+
+

@@ -1,0 +1,30 @@
+/* FACTS */
+
+book(lordoftherings, tolkien, fiction, 1000).
+book(laconfidential, elroy, crime, 350).
+book(bht, hawking, study, 300).
+book(flutes, duignan, drama, 500).
+book(garb, griffin, reference, 900).
+book(montypython, cleese, comedy, 250).
+
+buildLibrary(Lib) :- findall(book(Title, Author, Genre, Size), book(Title, Author, Genre, Size), Lib).
+
+/* RELATIONSHIPS */
+
+is_holiday(book(_, _, G, S)) :- G \== study, G \== reference, S < 400.
+
+holiday(B, [B | _]) :- is_holiday(B).
+holiday(B, [_ | T]) :- holiday(B, T).
+
+is_revision(book(_, _, G, S)) :- G == reference; G == study, S > 300.
+
+revision(B, [B | _]) :- is_revision(B).
+revision(B, [_ | T]) :- revision(B, T).
+
+is_literary(book(_, _, G, _)) :- G == drama.
+
+literary(B, [B | _]) :- is_literary(B).
+literary(B, [_ | T]) :- literary(B, T).
+
+
+
